@@ -17,6 +17,12 @@
         <get src="http://repository.jetbrains.com/remote-repos/com/google/guava/guava/12.0/guava-12.0-sources.jar"
              dest="${dependencies}/guava-12.0-sources.jar" usetimestamp="true"/>
 
+        <!-- JUnit -->
+        <get src="http://repository.jetbrains.com/remote-repos/junit/junit/4.10/junit-4.10.jar"
+             dest="${dependencies}/junit-4.10.jar" usetimestamp="true"/>
+        <get src="http://repository.jetbrains.com/remote-repos/junit/junit/4.10/junit-4.10-sources.jar"
+             dest="${dependencies}/junit-4.10-sources.jar" usetimestamp="true"/>
+
         <!-- commons-cli -->
         <get src="http://repository.jetbrains.com/remote-repos/commons-cli/commons-cli/1.2/commons-cli-1.2.jar"
              dest="${dependencies}/commons-cli-1.2.jar" usetimestamp="true"/>
