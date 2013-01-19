@@ -1,0 +1,38 @@
+<project name="Update Dependencies" default="update">
+    <property name="idea.base.url" value="http://teamcity.jetbrains.com/guestAuth/repository/download/bt410/74941:id"/>
+    <property name="dependencies" value="${basedir}/lib"/>
+    <property name="core" value="${dependencies}/core"/>
+
+    <target name="update">
+        <mkdir dir="${dependencies}"/>
+
+        <!-- Guava 12 -->
+        <get src="http://repository.jetbrains.com/remote-repos/com/google/guava/guava/12.0/guava-12.0.jar"
+             dest="${dependencies}/guava-12.0.jar" usetimestamp="true"/>
+        <get src="http://repository.jetbrains.com/remote-repos/com/google/guava/guava/12.0/guava-12.0-sources.jar"
+             dest="${dependencies}/guava-12.0-sources.jar" usetimestamp="true"/>
+
+        <!-- commons-cli -->
+        <get src="http://repository.jetbrains.com/remote-repos/commons-cli/commons-cli/1.2/commons-cli-1.2.jar"
+             dest="${dependencies}/commons-cli-1.2.jar" usetimestamp="true"/>
+        <get src="http://repository.jetbrains.com/remote-repos/commons-cli/commons-cli/1.2/commons-cli-1.2-sources.jar"
+             dest="${dependencies}/commons-cli-1.2-sources.jar" usetimestamp="true"/>
+
+        <!-- commons-io -->
+        <get src="http://repository.jetbrains.com/remote-repos/commons-io/commons-io/2.1/commons-io-2.1.jar"
+             dest="${dependencies}/commons-io-2.1.jar" usetimestamp="true"/>
+        <get src="http://repository.jetbrains.com/remote-repos/commons-io/commons-io/2.1/commons-io-2.1-sources.jar"
+             dest="${dependencies}/commons-io-2.1-sources.jar" usetimestamp="true"/>
+
+        <!-- IntelliJ Core -->
+        <mkdir dir="${core}"/>
+        <get src="${idea.base.url}/core/intellij-core.jar" dest="${core}/intellij-core.jar" usetimestamp="true"/>
+        <get src="${idea.base.url}/core/annotations.jar" dest="${core}/annotations.jar" usetimestamp="true"/>
+        <get src="${idea.base.url}/core/cli-parser-1.1.jar" dest="${core}/cli-parser-1.1.jar" usetimestamp="true"/>
+        <get src="${idea.base.url}/core/picocontainer.jar" dest="${core}/picocontainer.jar" usetimestamp="true"/>
+        <get src="${idea.base.url}/core/trove4j.jar" dest="${core}/trove4j.jar" usetimestamp="true"/>
+
+        <get src="${idea.base.url}/sources.zip" dest="${core}/idea-sdk-sources.zip" usetimestamp="true"/>
+    </target>
+
+</project>
