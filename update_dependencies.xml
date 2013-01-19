@@ -1,9 +1,12 @@
 <project name="Update Dependencies" default="update">
     <property name="idea.base.url" value="http://teamcity.jetbrains.com/guestAuth/repository/download/bt410/74941:id"/>
+    <property name="idea.zip.name" value="ideaIC-123.SNAPSHOT.win.zip"/>
+
     <property name="kotlin.base.url" value="http://teamcity.jetbrains.com/guestAuth/repository/download/bt345/75305:id"/>
     <property name="kotlin.version" value="0.4.419"/>
     <property name="dependencies" value="${basedir}/lib"/>
     <property name="core" value="${dependencies}/core"/>
+    <property name="idea" value="${dependencies}/idea"/>
 
     <target name="update">
         <mkdir dir="${dependencies}"/>
@@ -26,6 +29,15 @@
         <get src="http://repository.jetbrains.com/remote-repos/commons-io/commons-io/2.1/commons-io-2.1-sources.jar"
              dest="${dependencies}/commons-io-2.1-sources.jar" usetimestamp="true"/>
 
+        <!-- IntelliJ IDEA Open API -->
+        <mkdir dir="${idea}"/>
+        <get src="${idea.base.url}/${idea.zip.name}" dest="${dependencies}/${idea.zip.name}" usetimestamp="true"/>
+        <delete dir="${dependencies}/ideaSDK" failonerror="false"/>
+        <unzip src="${dependencies}/${idea.zip.name}" dest="${dependencies}/ideaSDK"/>
+        <copy file="${dependencies}/ideaSDK/lib/openapi.jar" todir="${idea}"/>
+
+        <get src="${idea.base.url}/sources.zip" dest="${idea}/idea-sdk-sources.zip" usetimestamp="true"/>
+
         <!-- IntelliJ Core -->
         <mkdir dir="${core}"/>
         <get src="${idea.base.url}/core/intellij-core.jar" dest="${core}/intellij-core.jar" usetimestamp="true"/>
@@ -33,8 +45,6 @@
         <get src="${idea.base.url}/core/cli-parser-1.1.jar" dest="${core}/cli-parser-1.1.jar" usetimestamp="true"/>
         <get src="${idea.base.url}/core/picocontainer.jar" dest="${core}/picocontainer.jar" usetimestamp="true"/>
         <get src="${idea.base.url}/core/trove4j.jar" dest="${core}/trove4j.jar" usetimestamp="true"/>
-
-        <get src="${idea.base.url}/sources.zip" dest="${core}/idea-sdk-sources.zip" usetimestamp="true"/>
 
         <!-- Kotlin compiler -->
         <get src="${kotlin.base.url}/kotlin-compiler-${kotlin.version}.zip" dest="${dependencies}/kotlin-compiler-${kotlin.version}.zip" usetimestamp="true"/>
