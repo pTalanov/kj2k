@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="j2k:plugin">
+    <output-path>$PROJECT_DIR$/out/artifacts/j2k_plugin</output-path>
+    <root id="archive" name="j2k.jar">
+      <element id="module-output" name="j2k" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/kotlin-runtime.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

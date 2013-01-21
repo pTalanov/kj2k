@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="kotlin-compiler">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/kotlinc/lib/kotlin-compiler.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../kotlin/compiler/backend/src" />
+      <root url="file://$PROJECT_DIR$/../kotlin/compiler/cli/cli-common/src" />
+      <root url="file://$PROJECT_DIR$/../kotlin/compiler/cli/src" />
+      <root url="file://$PROJECT_DIR$/../kotlin/compiler/frontend/src" />
+      <root url="file://$PROJECT_DIR$/../kotlin/compiler/frontend.java/src" />
+      <root url="file://$PROJECT_DIR$/../kotlin/compiler/integration-tests/src" />
+      <root url="file://$PROJECT_DIR$/../kotlin/compiler/jet.as.java.psi/src" />
+      <root url="file://$PROJECT_DIR$/../kotlin/compiler/tests" />
+      <root url="file://$PROJECT_DIR$/../kotlin/compiler/util/src" />
+      <root url="file://$PROJECT_DIR$/../kotlin/injector-generator/src" />
+    </SOURCES>
+  </library>
+</component>
