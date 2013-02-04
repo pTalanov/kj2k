@@ -2,8 +2,8 @@
     <property name="idea.base.url" value="http://teamcity.jetbrains.com/guestAuth/repository/download/bt410/74941:id"/>
     <property name="idea.zip.name" value="ideaIC-123.SNAPSHOT.win.zip"/>
 
-    <property name="kotlin.base.url" value="http://teamcity.jetbrains.com/guestAuth/repository/download/bt345/76185:id"/>
-    <property name="kotlin.version" value="0.4.476"/>
+    <property name="kotlin.base.url" value="http://teamcity.jetbrains.com/guestAuth/repository/download/bt345/76466:id"/>
+    <property name="kotlin.version" value="0.4.496"/>
     <property name="dependencies" value="${basedir}/lib"/>
     <property name="core" value="${dependencies}/core"/>
     <property name="idea" value="${dependencies}/idea"/>
