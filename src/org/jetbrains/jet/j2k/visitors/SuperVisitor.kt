@@ -3,7 +3,7 @@ package org.jetbrains.jet.j2k.visitors
 import com.intellij.psi.*
 import java.util.HashSet
 
-public open class SuperVisitor(): JavaRecursiveElementVisitor() {
+public open class SuperVisitor() : JavaRecursiveElementVisitor() {
     public val resolvedSuperCallParameters: HashSet<PsiExpressionList> = hashSet()
 
     public override fun visitMethodCallExpression(expression: PsiMethodCallExpression?): Unit {

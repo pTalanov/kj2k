@@ -2,16 +2,12 @@ package org.jetbrains.jet.j2k.visitors
 
 import com.intellij.psi.*
 import com.intellij.psi.tree.IElementType
-import org.jetbrains.annotations.Nullable
 import org.jetbrains.jet.j2k.Converter
 import org.jetbrains.jet.j2k.ast.*
-import java.util.Arrays
-import java.util.Collections
-import java.util.LinkedList
 import org.jetbrains.jet.j2k.countWritingAccesses
 import java.util.ArrayList
 
-public open class StatementVisitor(converter: Converter): ElementVisitor(converter) {
+public open class StatementVisitor(converter: Converter) : ElementVisitor(converter) {
     public override fun visitAssertStatement(statement: PsiAssertStatement?): Unit {
         myResult = AssertStatement(getConverter().expressionToExpression(statement?.getAssertCondition()),
                 getConverter().expressionToExpression(statement?.getAssertDescription()))
@@ -100,12 +96,12 @@ public open class StatementVisitor(converter: Converter): ElementVisitor(convert
             var forStatements = ArrayList<Element>()
             forStatements.add(getConverter().statementToStatement(initialization))
             forStatements.add(WhileStatement(
-                if (condition == null)
-                    LiteralExpression("true")
-                else
-                    getConverter().expressionToExpression(condition),
-                Block(arrayListOf(getConverter().statementToStatement(body),
-                Block(arrayListOf(getConverter().statementToStatement(update)), false)), false)))
+                    if (condition == null)
+                        LiteralExpression("true")
+                    else
+                        getConverter().expressionToExpression(condition),
+                    Block(arrayListOf(getConverter().statementToStatement(body),
+                            Block(arrayListOf(getConverter().statementToStatement(update)), false)), false)))
             myResult = Block(forStatements, false)
         }
     }
@@ -186,9 +182,9 @@ public open class StatementVisitor(converter: Converter): ElementVisitor(convert
                 i += ls.size()
             }
         }
-       if (!hasDefaultCase)
+        if (!hasDefaultCase)
             result.add(CaseContainer(listOf(DefaultSwitchLabelStatement()), ArrayList()))
-       return result
+        return result
     }
 
     public override fun visitSynchronizedStatement(statement: PsiSynchronizedStatement?): Unit {

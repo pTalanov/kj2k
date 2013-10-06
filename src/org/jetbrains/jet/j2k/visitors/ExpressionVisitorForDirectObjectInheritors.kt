@@ -7,7 +7,7 @@ import org.jetbrains.jet.j2k.ast.Identifier
 import com.intellij.psi.CommonClassNames.JAVA_LANG_OBJECT
 import org.jetbrains.jet.j2k.ast.MethodCallExpression
 
-public open class ExpressionVisitorForDirectObjectInheritors(converter: Converter): ExpressionVisitor(converter) {
+public open class ExpressionVisitorForDirectObjectInheritors(converter: Converter) : ExpressionVisitor(converter) {
     public override fun visitMethodCallExpression(expression: PsiMethodCallExpression?): Unit {
         val methodExpression = expression?.getMethodExpression()!!
         if (superMethodInvocation(methodExpression, "hashCode")) {

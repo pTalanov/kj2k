@@ -1,10 +1,9 @@
 package org.jetbrains.jet.j2k.visitors
 
 import com.intellij.psi.*
-import org.jetbrains.annotations.Nullable
 import java.util.LinkedHashSet
 
-public open class ThisVisitor(): JavaRecursiveElementVisitor() {
+public open class ThisVisitor() : JavaRecursiveElementVisitor() {
     private val myResolvedConstructors = LinkedHashSet<PsiMethod>()
 
     public override fun visitReferenceExpression(expression: PsiReferenceExpression?): Unit {

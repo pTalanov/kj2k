@@ -32,10 +32,10 @@ public open class Converter() {
     private val flags: MutableSet<J2KConverterFlags?>? = Sets.newHashSet()
 
     private val jetCoreEnvironment = JetCoreEnvironment(
-                                                object : Disposable {
-                                                    public override fun dispose() {
-                                                    }
-                                                }, CompilerConfiguration())
+            object : Disposable {
+                public override fun dispose() {
+                }
+            }, CompilerConfiguration())
 
 
     private val project = jetCoreEnvironment.getProject();
@@ -163,7 +163,7 @@ public open class Converter() {
         val implementsTypes: List<Type> = typesToNotNullableTypeList(psiClass.getImplementsListTypes())
         val extendsTypes: List<Type> = typesToNotNullableTypeList(psiClass.getExtendsListTypes())
         val name: Identifier = Identifier(psiClass.getName()!!)
-        val baseClassParams= ArrayList<Expression>()
+        val baseClassParams = ArrayList<Expression>()
         val members = getMembers(psiClass)
         val docComments = getDocComments(psiClass)
         val visitor: SuperVisitor = SuperVisitor()
@@ -175,7 +175,7 @@ public open class Converter() {
         }
 
         if (!psiClass.isEnum() && !psiClass.isInterface() && psiClass.getConstructors().size > 1 &&
-            getPrimaryConstructorForThisCase(psiClass) == null) {
+        getPrimaryConstructorForThisCase(psiClass) == null) {
             val finalOrWithEmptyInitializer: List<Field> = getFinalOrWithEmptyInitializer(fields)
             val initializers = HashMap<String, String>()
             for (m in members) {
@@ -514,21 +514,21 @@ public open class Converter() {
     class object {
         public val NOT_NULL_ANNOTATIONS: Set<String> = ImmutableSet.of<String>("org.jetbrains.annotations.NotNull", "com.sun.istack.internal.NotNull", "javax.annotation.Nonnull")!!
         public val PRIMITIVE_TYPE_CONVERSIONS: Map<String, String> = ImmutableMap.builder<String, String>()
-                ?.put("byte", BYTE.asString())
-                ?.put("short", SHORT.asString())
-                ?.put("int", INT.asString())
-                ?.put("long", LONG.asString())
-                ?.put("float", FLOAT.asString())
-                ?.put("double", DOUBLE.asString())
-                ?.put("char", CHAR.asString())
-                ?.put(JAVA_LANG_BYTE, BYTE.asString())
-                ?.put(JAVA_LANG_SHORT, SHORT.asString())
-                ?.put(JAVA_LANG_INTEGER, INT.asString())
-                ?.put(JAVA_LANG_LONG, LONG.asString())
-                ?.put(JAVA_LANG_FLOAT, FLOAT.asString())
-                ?.put(JAVA_LANG_DOUBLE, DOUBLE.asString())
-                ?.put(JAVA_LANG_CHARACTER, CHAR.asString())
-                ?.build()!!
+        ?.put("byte", BYTE.asString())
+        ?.put("short", SHORT.asString())
+        ?.put("int", INT.asString())
+        ?.put("long", LONG.asString())
+        ?.put("float", FLOAT.asString())
+        ?.put("double", DOUBLE.asString())
+        ?.put("char", CHAR.asString())
+        ?.put(JAVA_LANG_BYTE, BYTE.asString())
+        ?.put(JAVA_LANG_SHORT, SHORT.asString())
+        ?.put(JAVA_LANG_INTEGER, INT.asString())
+        ?.put(JAVA_LANG_LONG, LONG.asString())
+        ?.put(JAVA_LANG_FLOAT, FLOAT.asString())
+        ?.put(JAVA_LANG_DOUBLE, DOUBLE.asString())
+        ?.put(JAVA_LANG_CHARACTER, CHAR.asString())
+        ?.build()!!
 
         private fun quoteKeywords(packageName: String): String {
             return packageName.split("\\.").map { Identifier(it).toKotlin() }.makeString(".")
@@ -607,9 +607,11 @@ public open class Converter() {
             return false
         }
         private fun removeEmpty(statements: List<Element>): List<Element> {
-            return statements.filterNot { it == Statement.EMPTY_STATEMENT ||
-                                          it == Expression.EMPTY_EXPRESSION ||
-                                          it == Element.EMPTY_ELEMENT }
+            return statements.filterNot {
+                it == Statement.EMPTY_STATEMENT ||
+                it == Expression.EMPTY_EXPRESSION ||
+                it == Element.EMPTY_ELEMENT
+            }
         }
 
         private fun isNotOpenMethod(method: PsiMethod): Boolean {
@@ -841,7 +843,7 @@ public fun countWritingAccesses(element: PsiElement?, container: PsiElement?): I
     return counter
 }
 
-open class ReferenceCollector(): JavaRecursiveElementVisitor() {
+open class ReferenceCollector() : JavaRecursiveElementVisitor() {
     private val myCollectedReferences = ArrayList<PsiReferenceExpression>()
 
     public open fun getCollectedReferences(): List<PsiReferenceExpression> {

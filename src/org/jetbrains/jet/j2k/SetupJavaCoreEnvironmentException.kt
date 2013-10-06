@@ -16,5 +16,5 @@ package org.jetbrains.jet.j2k
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public open class SetupJavaCoreEnvironmentException(s: String?): RuntimeException() {
+public open class SetupJavaCoreEnvironmentException(s: String?) : RuntimeException() {
 }

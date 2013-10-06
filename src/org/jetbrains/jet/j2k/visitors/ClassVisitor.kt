@@ -4,7 +4,7 @@ import com.intellij.psi.JavaRecursiveElementVisitor
 import com.intellij.psi.PsiClass
 import java.util.HashSet
 
-public open class ClassVisitor(): JavaRecursiveElementVisitor() {
+public open class ClassVisitor() : JavaRecursiveElementVisitor() {
     private val myClassIdentifiers = HashSet<String>()
 
     public open fun getClassIdentifiers(): Set<String> {

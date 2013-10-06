@@ -2,10 +2,8 @@ package org.jetbrains.jet.j2k.visitors
 
 import com.intellij.psi.*
 import com.intellij.psi.tree.IElementType
-import org.jetbrains.annotations.Nullable
 import org.jetbrains.jet.j2k.Converter
 import org.jetbrains.jet.j2k.ast.*
-import org.jetbrains.jet.j2k.ast.types.EmptyType
 import org.jetbrains.jet.j2k.ast.types.Type
 import org.jetbrains.jet.lang.types.expressions.OperatorConventions
 import java.util.ArrayList
@@ -15,7 +13,7 @@ import com.intellij.psi.util.PsiTreeUtil
 import org.jetbrains.jet.lang.types.lang.PrimitiveType
 import org.jetbrains.jet.j2k.isAnnotatedAsNotNull
 
-public open class ExpressionVisitor(converter: Converter): StatementVisitor(converter) {
+public open class ExpressionVisitor(converter: Converter) : StatementVisitor(converter) {
     {
         myResult = Expression.EMPTY_EXPRESSION
     }
@@ -94,7 +92,7 @@ public open class ExpressionVisitor(converter: Converter): StatementVisitor(conv
     public override fun visitInstanceOfExpression(expression: PsiInstanceOfExpression?): Unit {
         val checkType: PsiTypeElement? = expression?.getCheckType()
         myResult = IsOperator(getConverter().expressionToExpression(expression?.getOperand()),
-                              myConverter.typeElementToTypeElement(checkType))
+                myConverter.typeElementToTypeElement(checkType))
     }
 
     public override fun visitLiteralExpression(expression: PsiLiteralExpression?): Unit {
@@ -168,12 +166,12 @@ public open class ExpressionVisitor(converter: Converter): StatementVisitor(conv
         if (constructor == null || Converter.isConstructorPrimary(constructor) || isNotConvertedClass)
         {
             return NewClassExpression(getConverter().elementToElement(classReference),
-                                      getConverter().argumentsToExpressionList(expression!!),
-                                      getConverter().expressionToExpression(expression.getQualifier()),
-                                      (if (anonymousClass != null)
-                                           getConverter().anonymousClassToAnonymousClass(anonymousClass)
-                                       else
-                                           null))
+                    getConverter().argumentsToExpressionList(expression!!),
+                    getConverter().expressionToExpression(expression.getQualifier()),
+                    (if (anonymousClass != null)
+                        getConverter().anonymousClassToAnonymousClass(anonymousClass)
+                    else
+                        null))
         }
 
         val reference: PsiJavaCodeReferenceElement? = expression?.getClassReference()
@@ -247,9 +245,9 @@ public open class ExpressionVisitor(converter: Converter): StatementVisitor(conv
                 }
             }
             if (resolved is PsiMember && resolved.hasModifierProperty(PsiModifier.STATIC) &&
-                resolved.getContainingClass() != null &&
-                 PsiTreeUtil.getParentOfType(expression, javaClass<PsiClass>()) != resolved.getContainingClass() &&
-                 !isStaticallyImported(resolved, expression)) {
+            resolved.getContainingClass() != null &&
+            PsiTreeUtil.getParentOfType(expression, javaClass<PsiClass>()) != resolved.getContainingClass() &&
+            !isStaticallyImported(resolved, expression)) {
                 var member = resolved as PsiMember
                 var result = Identifier(referencedName).toKotlin()
                 while(member.getContainingClass() != null) {
@@ -384,7 +382,7 @@ public open class ExpressionVisitor(converter: Converter): StatementVisitor(conv
             if (tokenType == JavaTokenType.EXCL)
                 return "!"
 
-//            System.out.println("UNSUPPORTED TOKEN TYPE: " + tokenType?.toString())
+            //            System.out.println("UNSUPPORTED TOKEN TYPE: " + tokenType?.toString())
             return ""
         }
 
@@ -508,5 +506,5 @@ private fun importResolvesTo(stmt: PsiImportStaticStatement?, member: PsiMember)
     val targetContainingClass = member.getContainingClass()
     var importedClass = stmt?.resolveTargetClass()
     return importedClass == targetContainingClass && (stmt?.isOnDemand() ?: false ||
-        stmt?.getReferenceName() == member.getName())
+    stmt?.getReferenceName() == member.getName())
 }
