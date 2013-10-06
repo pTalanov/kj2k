@@ -53,8 +53,8 @@ public open class Converter() {
         return flags?.contains(flag)!!
     }
 
-    public open fun setClassIdentifiers(identifiers: MutableSet<String>) {
-        classIdentifiersSet = identifiers
+    public open fun setClassIdentifiers(identifiers: Set<String>) {
+        classIdentifiersSet = HashSet(identifiers)
     }
 
     public open fun getClassIdentifiers(): Set<String> {
@@ -104,8 +104,9 @@ public open class Converter() {
                     kotlinAnalogsForClass.isEmpty()
                 }
             }))
-        for (i : String in additionalImports)
+        for (i in additionalImports) {
             imports.add(Import(i))
+        }
 
         val body: ArrayList<Node> = arrayListOf()
         for(element in javaFile.getChildren()) {
@@ -126,8 +127,8 @@ public open class Converter() {
     private fun getMembers(psiClass: PsiClass): MutableList<Node> {
         val members = ArrayList<Node>()
         val lbraceOffset = psiClass.getLBrace()?.getTextRange()?.getStartOffset() ?: 0
-        for (e : PsiElement? in psiClass.getChildren()) {
-            val isDocComment = e?.getTextRange()?.getStartOffset() ?: 0 < lbraceOffset
+        for (e in psiClass.getChildren()) {
+            val isDocComment = e.getTextRange()?.getStartOffset() ?: 0 < lbraceOffset
             if (isDocComment) continue
             val converted = memberToMember(e, psiClass)
             if (converted != null) members.add(converted)
@@ -174,7 +175,7 @@ public open class Converter() {
         }
 
         if (!psiClass.isEnum() && !psiClass.isInterface() && psiClass.getConstructors().size > 1 &&
-        getPrimaryConstructorForThisCase(psiClass) == null) {
+            getPrimaryConstructorForThisCase(psiClass) == null) {
             val finalOrWithEmptyInitializer: List<Field> = getFinalOrWithEmptyInitializer(fields)
             val initializers = HashMap<String, String>()
             for (m in members) {
